@@ -20,7 +20,7 @@ const GameBoard = () => {
 
   const initializePatterns = () => (
     <>
-      <Pattern id="red" size={{ x: 7.5, y: 8 }} link="https://github.com/pocofrosty/CiS-197-Final-Project/blob/main/frontend/assets/Forest-Test.JPG?raw=true" />
+      <Pattern id="red" size={{ x: 2.7, y: 3 }} link="https://github.com/pocofrosty/CiS197-Chinese-Checkers/blob/main/frontend/assets/red-marble.PNG?raw=true" />
       <Pattern id="blue" size={{ x: 7.5, y: 8 }} link="https://github.com/pocofrosty/CiS-197-Final-Project/blob/main/frontend/assets/Wheat-Test.JPG?raw=true" />
       <Pattern id="green" size={{ x: 7.5, y: 8 }} link="https://github.com/pocofrosty/CiS-197-Final-Project/blob/main/frontend/assets/Sheep-Test.JPG?raw=true" />
       <Pattern id="orange" size={{ x: 7.5, y: 8 }} link="https://github.com/pocofrosty/CiS-197-Final-Project/blob/main/frontend/assets/Brick-Test.JPG?raw=true" />
@@ -57,6 +57,7 @@ const GameBoard = () => {
               const hex = convertTupleToHex(tuple)
               return (
                 <Hexagon
+                  fill="red"
                   key={`${hex.q}${hex.r}${hex.s}`}
                   q={hex.q}
                   r={hex.r}

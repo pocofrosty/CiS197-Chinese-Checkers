@@ -23,8 +23,8 @@ body {
 svg {}
 
 svg g {
-    fill: #7f90f1;
-    fill-opacity: 0;
+    fill: #f5f5f5;
+    fill-opacity: 0.6;
 }
 
 svg g:hover {
