@@ -21,29 +21,18 @@ const GameBoard = () => {
   const initializePatterns = () => (
     <>
       <Pattern id="red" size={{ x: 2.7, y: 3 }} link="https://github.com/pocofrosty/CiS197-Chinese-Checkers/blob/main/frontend/assets/red-marble.PNG?raw=true" />
-      <Pattern id="blue" size={{ x: 7.5, y: 8 }} link="https://github.com/pocofrosty/CiS-197-Final-Project/blob/main/frontend/assets/Wheat-Test.JPG?raw=true" />
-      <Pattern id="green" size={{ x: 7.5, y: 8 }} link="https://github.com/pocofrosty/CiS-197-Final-Project/blob/main/frontend/assets/Sheep-Test.JPG?raw=true" />
-      <Pattern id="orange" size={{ x: 7.5, y: 8 }} link="https://github.com/pocofrosty/CiS-197-Final-Project/blob/main/frontend/assets/Brick-Test.JPG?raw=true" />
-      <Pattern id="yellow" size={{ x: 7.5, y: 8 }} link="https://github.com/pocofrosty/CiS-197-Final-Project/blob/main/frontend/assets/Ore-Test.JPG?raw=true" />
-      <Pattern id="purple" size={{ x: 7.7, y: 8 }} link="https://github.com/pocofrosty/CiS-197-Final-Project/blob/main/frontend/assets/Desert-Test.JPG?raw=true" />
+      <Pattern id="blue" size={{ x: 2.7, y: 3 }} link="https://github.com/pocofrosty/CiS197-Chinese-Checkers/blob/main/frontend/assets/blue-marble.PNG?raw=true" />
+      <Pattern id="green" size={{ x: 2.7, y: 3 }} link="https://github.com/pocofrosty/CiS197-Chinese-Checkers/blob/main/frontend/assets/green-marble.PNG?raw=true" />
+      <Pattern id="orange" size={{ x: 2.7, y: 3 }} link="https://github.com/pocofrosty/CiS197-Chinese-Checkers/blob/main/frontend/assets/orange-marble.PNG?raw=true" />
+      <Pattern id="yellow" size={{ x: 2.7, y: 3 }} link="https://github.com/pocofrosty/CiS197-Chinese-Checkers/blob/main/frontend/assets/yellow-marble.PNG?raw=true" />
+      <Pattern id="purple" size={{ x: 2.7, y: 3 }} link="https://github.com/pocofrosty/CiS197-Chinese-Checkers/blob/main/frontend/assets/purple-marble.PNG?raw=true" />
     </>
   )
-  //   const hexagons = GridGenerator.hexagon(2)
-  //   hexagons.push({ q: 1, r: 2, s: -3 })
-  //   const HexagonData = {}
-  //   hexagons.forEach((ele, idx) => {
-  //     HexagonData[`(${ele.q},${ele.r},${ele.s})`] = {
-  //       ID: ele.q + ele.r + ele.s,
-  //     }
-  //     console.log(`(${ele.q},${ele.r},${ele.s})`)
-  //   })
 
   const convertTupleToHex = str => {
     const q = str.substring(str.indexOf('(') + 1, str.indexOf(','))
-    console.log(q)
     const r = str.substring(str.indexOf(',') + 1, str.lastIndexOf(','))
-    console.log(r)
-    return new Hex(q, r, -q - r)
+    return new Hex(parseInt(q, 10), parseInt(r, 10), -parseInt(q, 10) - parseInt(r, 10))
   }
 
   return (
