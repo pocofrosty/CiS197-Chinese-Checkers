@@ -5,6 +5,10 @@ const cors = require('cors')
 const cookieSession = require('cookie-session')
 const passport = require('passport')
 
+const AuthRouter = require('./routes/auth')
+
+const PassportSetup = require('./authentication/passport-setup')
+
 const keys = require('./keys')
 
 const MONGO_URI = process.env.MONGO_URI || keys.mongoDB.database
@@ -27,6 +31,8 @@ app.use(cors())
 
 app.use(passport.initialize())
 app.use(passport.session())
+
+app.use('/auth', AuthRouter)
 
 app.use((err, req, res, next) => {
   console.error(err.stack)
