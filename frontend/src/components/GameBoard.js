@@ -1,20 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import {
-  Pattern, HexGrid, Layout, Hexagon, Text, GridGenerator, HexUtils, Hex,
+  Pattern, HexGrid, Layout, Hexagon, Text, HexUtils, Hex,
 } from 'react-hexgrid'
 
 const GameBoard = () => {
-  const HexagonData = {}
+  const [hexagonData, setHexagonData] = useState({})
 
-  for (let i = -4; i < 9; i++) {
-    for (let j = -4; j < 5 - i; j++) {
-      HexagonData[`(${i},${j},${-i - j})`] = 3
+  const initializeNewGame = () => {
+    for (let i = -4; i < 9; i++) {
+      for (let j = -4; j < 5 - i; j++) {
+        const tuple = `(${i},${j},${-i - j})`
+        const temp = hexagonData
+        temp[tuple] = { color: null }
+        setHexagonData(temp)
+      }
     }
-  }
-  for (let i = -8; i < 5; i++) {
-    for (let j = -4 - i; j < 5; j++) {
-      HexagonData[`(${i},${j},${-i - j})`] = 3
+    for (let i = -8; i < 5; i++) {
+      for (let j = -4 - i; j < 5; j++) {
+        const tuple = `(${i},${j},${-i - j})`
+        const temp = hexagonData
+        temp[tuple] = { color: null }
+        setHexagonData(temp)
+      }
     }
   }
 
@@ -37,12 +45,17 @@ const GameBoard = () => {
 
   return (
     <div className="App">
-      <label> Test </label>
+      <button onClick={() => {
+        initializeNewGame()
+      }}
+      >
+        Render
+      </button>
       <HexGrid width={1000} height={1000}>
         {initializePatterns()}
         <Layout size={{ x: 3, y: 3 }} flat={false} spacing={1.02} origin={{ x: 0, y: 0 }}>
           {
-            Object.keys(HexagonData).map(tuple => {
+            Object.keys(hexagonData).map(tuple => {
               const hex = convertTupleToHex(tuple)
               return (
                 <Hexagon
