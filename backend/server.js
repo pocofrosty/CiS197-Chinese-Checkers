@@ -6,6 +6,8 @@ const cookieSession = require('cookie-session')
 const passport = require('passport')
 
 const AuthRouter = require('./routes/auth')
+const AccountRouter = require('./routes/account')
+const GamestateRouter = require('./routes/gamestate')
 
 const PassportSetup = require('./authentication/passport-setup')
 
@@ -33,6 +35,8 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 app.use('/auth', AuthRouter)
+app.use('/account', AccountRouter)
+app.use('/gamestate', GamestateRouter)
 
 app.use((err, req, res, next) => {
   console.error(err.stack)

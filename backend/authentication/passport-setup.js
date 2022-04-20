@@ -22,14 +22,14 @@ passport.use(new GoogleStrategy({
 }, (accessToken, refreshToken, profile, done) => {
   Account.findOne({ googleId: profile.id }).then(currentAccount => {
     if (currentAccount) {
-      console.log('already exists')
+      console.log(currentAccount)
       done(null, currentAccount)
     } else {
       new Account({
         username: profile.displayName,
+        password: null,
         googleID: profile.id,
       }).save().then(newAccount => {
-        console.log(`new account created: ${newAccount}`)
         done(null, newAccount)
       })
     }
