@@ -22,10 +22,10 @@ const GameBoard = () => {
     <>
       <Pattern id="red" size={{ x: 7.5, y: 8 }} link="https://github.com/pocofrosty/CiS-197-Final-Project/blob/main/frontend/assets/Forest-Test.JPG?raw=true" />
       <Pattern id="blue" size={{ x: 7.5, y: 8 }} link="https://github.com/pocofrosty/CiS-197-Final-Project/blob/main/frontend/assets/Wheat-Test.JPG?raw=true" />
-      <Pattern id="black" size={{ x: 7.5, y: 8 }} link="https://github.com/pocofrosty/CiS-197-Final-Project/blob/main/frontend/assets/Sheep-Test.JPG?raw=true" />
-      <Pattern id="yellow" size={{ x: 7.5, y: 8 }} link="https://github.com/pocofrosty/CiS-197-Final-Project/blob/main/frontend/assets/Brick-Test.JPG?raw=true" />
-      <Pattern id="green" size={{ x: 7.5, y: 8 }} link="https://github.com/pocofrosty/CiS-197-Final-Project/blob/main/frontend/assets/Ore-Test.JPG?raw=true" />
-      <Pattern id="white" size={{ x: 7.7, y: 8 }} link="https://github.com/pocofrosty/CiS-197-Final-Project/blob/main/frontend/assets/Desert-Test.JPG?raw=true" />
+      <Pattern id="green" size={{ x: 7.5, y: 8 }} link="https://github.com/pocofrosty/CiS-197-Final-Project/blob/main/frontend/assets/Sheep-Test.JPG?raw=true" />
+      <Pattern id="orange" size={{ x: 7.5, y: 8 }} link="https://github.com/pocofrosty/CiS-197-Final-Project/blob/main/frontend/assets/Brick-Test.JPG?raw=true" />
+      <Pattern id="yellow" size={{ x: 7.5, y: 8 }} link="https://github.com/pocofrosty/CiS-197-Final-Project/blob/main/frontend/assets/Ore-Test.JPG?raw=true" />
+      <Pattern id="purple" size={{ x: 7.7, y: 8 }} link="https://github.com/pocofrosty/CiS-197-Final-Project/blob/main/frontend/assets/Desert-Test.JPG?raw=true" />
     </>
   )
   //   const hexagons = GridGenerator.hexagon(2)
