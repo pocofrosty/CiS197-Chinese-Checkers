@@ -3,25 +3,15 @@
 import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 
-import { io } from 'socket.io-client'
-
 import {
   Pattern, HexGrid, Layout, Hexagon, Text, HexUtils, Hex,
 } from 'react-hexgrid'
+import TextBox from './subcomponents/TextBox'
 
 const GameBoard = ({ setCurrentUsername, currentUsername }) => {
   const [hexagons, setHexagons] = useState({})
-
-  const updateState = async () => {
-    const { data } = await axios.get('/account/currentLogin')
-    setCurrentUsername(data)
-    const { data: data2 } = await axios.get('/gamestate')
-    setHexagons(data2)
-  }
-
-  useEffect(() => {
-    updateState()
-  }, [])
+  const [gameName, setGameName] = useState('')
+  const [count, setCount] = useState(0)
 
   const convertTupleToHex = str => {
     const q = str.substring(str.indexOf('(') + 1, str.indexOf(','))
@@ -70,8 +60,6 @@ const GameBoard = ({ setCurrentUsername, currentUsername }) => {
     return hexagonData
   }
 
-  const temp = initializeNewGame()
-
   const initializePatterns = () => (
     <>
       <Pattern id="red" size={{ x: 2.7, y: 3 }} link="https://github.com/pocofrosty/CiS197-Chinese-Checkers/blob/main/frontend/assets/red-marble.PNG?raw=true" />
@@ -83,17 +71,48 @@ const GameBoard = ({ setCurrentUsername, currentUsername }) => {
     </>
   )
 
+  const updateState = async () => {
+    const { data } = await axios.get('/account/currentLogin')
+    setCurrentUsername(data)
+    const { data: data2 } = await axios.post('/gamestate/find', { name: gameName })
+    setHexagons(data2.board)
+  }
+
+  useEffect(() => {
+    updateState()
+  }, [])
+
   return (
-    <div className="App">
+    <div className="grid grid-cols-1 py-2 px-3 px-16 App">
       <button onClick={() => {
+        setCount(count + 1)
       }}
       >
-        {`${currentUsername}I`}
+        {' '}
+        Refresh
       </button>
+      <br />
+      <TextBox backgroundName="gameName" setText={setGameName} text={gameName} />
+      <br />
+      <button onClick={async () => {
+        const { data: data2 } = await axios.post('/gamestate/find', { name: gameName })
+        setHexagons(data2.board)
+      }}
+      >
+        {' '}
+        Load Game
+        {' '}
+
+      </button>
+      <label>
+        {' '}
+        {currentUsername}
+        {' '}
+      </label>
       <HexGrid width={1000} height={1000}>
         <Layout size={{ x: 3, y: 3 }} flat={false} spacing={1.02} origin={{ x: 0, y: 0 }}>
-          {
-            Object.keys(temp).map(tuple => {
+          { (hexagons)
+            ? Object.keys(hexagons).map(tuple => {
               const hex = convertTupleToHex(tuple)
               return (
                 <Hexagon
@@ -101,15 +120,16 @@ const GameBoard = ({ setCurrentUsername, currentUsername }) => {
                   q={hex.q}
                   r={hex.r}
                   s={hex.s}
-                  fill={temp[tuple].color}
-                >
-                  <Text>
-                    {HexUtils.getID(hex)}
-                  </Text>
-                </Hexagon>
+                  fill={hexagons[tuple].color}
+                  onClick={async () => {
+                    const temp = hexagons
+                    temp[tuple].color = 'red'
+                    setCount(count + 1)
+                  }}
+                />
               )
             })
-        }
+            : null}
           {initializePatterns()}
         </Layout>
       </HexGrid>

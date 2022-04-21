@@ -10,6 +10,7 @@ const LoginButton = ({
       try {
         await axios.post('/account/login', { username, password })
         setCurrentUsername(username)
+        console.log(username)
         const navigate = switchScreens
         navigate('/gameboard', { replace: true })
       } catch (e) {

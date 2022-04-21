@@ -2,6 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const path = require('path')
 const cors = require('cors')
+const http = require('http')
 const cookieSession = require('cookie-session')
 const passport = require('passport')
 
@@ -21,6 +22,15 @@ mongoose.connect(MONGO_URI, {
 })
 
 const app = express()
+const server = http.createServer(app)
+const io = new http.Server(server)
+
+io.on('connection', socket => {
+  console.log('a user is connected')
+  socket.on('update', data => {
+    io.emit('update', data)
+  })
+})
 
 app.use(cookieSession({
   keys: [keys.session.cookieKey],
